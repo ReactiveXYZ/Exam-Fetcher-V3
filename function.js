@@ -405,7 +405,7 @@ $("body").on('submit','#sform',function(e){
     showPreloader();
 
     var postData = $(this).serializeArray();
-    var formURL = 'function.php';
+    var formURL = 'function_test.php';
 
     $.ajax({
         url: formURL,

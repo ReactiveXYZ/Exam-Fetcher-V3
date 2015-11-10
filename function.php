@@ -1,9 +1,10 @@
 <?php
-
-require_once "vendor/autoload.php";
+require('vendor/autoload.php');
 
 use VCAA\VCAAExamFetchController;
 use VCAA\VCAAExamDownloader;
+use VCAA\VCAAExamPageExtraOptions;
+use VCAA\ExamFetchingMode;
 
 /*** GET METHODS ***/
 if (isset($_GET['remotedownload'])){

@@ -1,7 +1,5 @@
 <?php
-
 namespace VCAA;
-
 define("BASE_URL",$_SERVER['DOCUMENT_ROOT']."/");
 define("LIB_URL",BASE_URL.'libs/');
 define("TEMP_URL",BASE_URL.'temp/');
@@ -9,12 +7,6 @@ define("REPO_URL",BASE_URL.'repository/');
 
 require_once LIB_URL."simple_html_dom.php";
 require_once LIB_URL."zipstream.php";
-
-abstract class ExamFetchingMode{
-    const SINGLE = 0;
-    const BULK = 1;
-    const TIME_FRAME = 2;
-}
 
 class VCAAExamFetchController {
 
@@ -176,14 +168,6 @@ class VCAAExamFetchController {
     {
         $this->mode = $mode;
     }
-    /***** Private Methods *****/
-    //add exam instance to array
-    private function addSubjects($subject_name,$title,$year,$downloadURL){
-        //Construct instance
-        $exam = new VCAAExam($subject_name,$title,$year,$downloadURL);
-        //Add to array
-        array_push($this->examArray,$exam);
-    }
 
     //find Subject Link in the collection page
     private function findGeneralSubjectURL($subject_name){
@@ -281,108 +265,4 @@ class VCAAExamFetchController {
         }
         return $collection;
     }
-}
-
-class VCAAExamDownloader{
-
-    //Download to zip
-    static function downloadToZip($data){
-        // set cookie
-        setcookie('fileLoading',true,time()+10,'/');
-
-        //Create ZipArchive using Stream
-        $zipStream = new ZipStream('exams.zip');
-        foreach ($data as $item){
-            //Add files
-            $filesInDirectory = $item["value"];
-            foreach ($filesInDirectory as $file){
-                //Download file
-                $downloaded_file = file_get_contents($file);
-                //Add to zip
-                $zipStream -> add_file($item["key"]."/".basename($file),$downloaded_file);
-            }
-        }
-        $zipStream->finish();
-        //Clean up
-        ob_clean();
-        flush();
-    }
-
-    //Download a single file
-    static function downloadFile($url){
-        set_time_limit(0);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        $r = curl_exec($ch);
-        curl_close($ch);
-        header('Expires: 0'); // no cache
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
-        header('Cache-Control: private', false);
-        header('Content-Type: application/force-download');
-        header('Content-Disposition: attachment; filename="' . basename($url) . '"');
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Length: ' . strlen($r)); // provide file size
-        header('Connection: close');
-        echo $r;
-    }
-
-    static function downloadFileToServer($url,$filename,$fileDir){
-        if (file_exists($fileDir.'/'.$filename)){
-            return true;
-        }
-        $file = file_get_contents($url);
-        $fo = fopen($fileDir.'/'.$filename,'w');
-        fwrite($fo,$file);
-        fclose($fo);
-        return true;
-    }
-}
-
-class VCAAExamPageExtraOptions{
-
-    public static function sendEmail($from,$to,$message){
-
-        $response = null;
-
-        //validate from and to emails
-        if (filter_var($from,FILTER_VALIDATE_EMAIL) && filter_var($to,FILTER_VALIDATE_EMAIL)){
-            //set a header
-            $header = 'From'.$from.'\r\n';
-            $subject = "Hey, check out these VCAA exams!";
-            //send
-            mail($to,$subject,$message,$header);
-            $response = "Successfully Sent :)";
-
-        }else{
-            $response = "Email validation failed. Please retry entering your email";
-        }
-
-        return $response;
-
-    }
-
-
-    public static function refreshHomePageCache(){
-        //check if cache exists
-        if (file_exists(TEMP_URL.'home.html')){
-            // retrieve the file
-            $file = file_get_html(VCAAExamController::getBaseURLToLoad(),false,VCAAExamController::getContext());
-            // delete existing file
-            unlink(TEMP_URL.'home.html');
-            // load new file
-            $fo = fopen(TEMP_URL.'home.html','w');
-            fwrite($fo,$file);
-            fclose($fo);
-            return "Successfully refreshed";
-        }else{
-            return "Error! Cache does not exist!";
-        }
-    }
-
-
 }

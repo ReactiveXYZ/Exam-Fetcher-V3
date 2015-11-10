@@ -5,7 +5,9 @@ namespace VCAA\exam;
 */
 class Exam
 {
-	protected $name;
+    protected $subject_name;
+
+	protected $title;
 
 	protected $year;
 
@@ -13,16 +15,23 @@ class Exam
 
 	protected array $options;
 	
-	public function __construct($name,$year,$url,array $options = null)
+	public function __construct($subject_name,$title,$year,$url,array $options = null)
 	{
 
-		$this->name = $name;
+		$this->subject_name = $subject_name;
+
+        $this->title = $title;
 
         $this->year = $year;
 
         $this->url = $url;
 
-        $this->options = $options;
+        if ($options != null) {
+
+            $this->options = $options;
+            
+        }
+        
 	}
 	
     /**
@@ -30,9 +39,9 @@ class Exam
      *
      * @return mixed
      */
-    public function getName()
+    public function getSubjectName()
     {
-        return $this->name;
+        return $this->subject_name;
     }
 
     /**
@@ -63,5 +72,17 @@ class Exam
     public function getOptions()
     {
         return $this->options;
+    }
+
+    
+
+    /**
+     * Gets the value of title.
+     *
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

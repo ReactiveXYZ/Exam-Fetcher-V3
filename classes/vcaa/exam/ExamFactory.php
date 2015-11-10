@@ -32,7 +32,7 @@ class ExamFactory
     {
         $extra_options = $options["options"]?$options["options"]:null;
 
-        $exam = new Exam($options["name"],$options["year"],$options["url"],$extra_options);
+        $exam = new Exam($options["subject_name"],$options["title"],$options["year"],$options["url"],$extra_options);
         
         $this->package_exam($exam);
 
@@ -68,13 +68,13 @@ class ExamFactory
 
         foreach ($this->exam_data_array as Exam $exam){
 
-        	if (!$output[$exam->getName()]) {
+        	if (!$output[$exam->getSubjectName()]) {
 
-        		$output[$exam->getName()] = array();
+        		$output[$exam->getSubjectName()] = array();
 
         	}else{
 
-        		array_push($output[$exam->getName()], $exam);
+        		array_push($output[$exam->getSubjectName()], $exam);
 
         	}
         }
@@ -101,6 +101,9 @@ class ExamFactory
             $output[$subjects] = $year_output;
         }
     	
+        //clean cache
+        $this->exam_data_array = array();
+
     	return $output;
     }
 
