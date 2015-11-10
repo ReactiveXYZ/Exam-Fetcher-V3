@@ -1,0 +1,28 @@
+.text-core {
+  position: relative;
+  height: 50px !important;
+  width: 100% !important;
+  background-color: #ffffff;
+}
+.text-core .text-wrap[style] {
+  background: #fff;
+  position: absolute;
+  width: 100% !important;
+}
+.text-core .text-wrap textarea,
+.text-core .text-wrap input[style] {
+  outline: none;
+  resize: none;
+  position: absolute;
+  z-index: 1;
+  background: none;
+  overflow: hidden;
+  margin: 0;
+  white-space: nowrap;
+  font: 15px "lucida grande", tahoma, verdana, arial, sans-serif;
+  line-height: 15px;
+  height: auto;
+  padding-top: 15px;
+  width: 100% !important;
+}
+
