@@ -259,7 +259,7 @@ $(document).ready(function(){
         }
     });
 
-    stWidget.addEntry({
+    /*stWidget.addEntry({
         "service":"sharethis",
         "element":document.getElementById('share_container'),
         "url":document.domain,
@@ -267,7 +267,7 @@ $(document).ready(function(){
         "type":"large",
         "text":"Share this" ,
         "summary":"I just downloaded VCAA exams using exam fetcher! A convenient tool for fetching exam! Go check it out!"
-    });
+    });*/
 
 });
 

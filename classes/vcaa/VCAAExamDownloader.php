@@ -1,5 +1,6 @@
 <?php
 namespace VCAA;
+
 class VCAAExamDownloader{
 
     //Download to zip

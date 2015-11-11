@@ -1,6 +1,6 @@
 <?php
 
-namespace VCAA\exam\;
+namespace VCAA\exam;
 
 use VCAA\exam\Exam;
 
@@ -14,7 +14,9 @@ class ExamFactory
 	
 	protected $exam_data_array = array();
 
-
+    /*
+     * @todo constructor injection of database request
+     */
 	public function __construct()
 	{		
 		
@@ -34,7 +36,7 @@ class ExamFactory
 
         $exam = new Exam($options["subject_name"],$options["title"],$options["year"],$options["url"],$extra_options);
         
-        $this->package_exam($exam);
+        $this->package_exam_on_fly($exam);
 
     }
 
@@ -48,29 +50,86 @@ class ExamFactory
 
 	private function package_exam(Exam $exam_instance)
 	{
-		array_push($this->exam_data_array, $exam_instance);
+		
+        array_push($this->exam_data_array, $exam_instance);        
+
 	}
+
+    /** Package and group exams on the fly */
+
+    private function package_exam_on_fly(Exam $exam_instance)
+    {
+        $this->group_on_fly($exam_instance);
+    }
+
+    /**
+     * Group exam instances on the fly
+     * 
+     * @param  Exam   $exam Single Exam Instance
+     * 
+     * @return void
+     */
+    
+    private function group_on_fly(Exam $exam)
+    {
+        if (!isset($this->exam_data_array[$exam->getSubjectName()])) {
+
+            $this->exam_data_array[$exam->getSubjectName()] = array();
+
+            if (!isset($this->exam_data_array[$exam->getSubjectName()][$exam->getYear()])) {
+            
+                $this->exam_data_array[$exam->getSubjectName()][$exam->getYear()] = array();
+
+                array_push($this->exam_data_array[$exam->getSubjectName()][$exam->getYear()], $exam);
+           
+            }else{
+
+                array_push($this->exam_data_array[$exam->getSubjectName()][$exam->getYear()], $exam);
+
+            }
+
+        }else{
+
+            if (!isset($this->exam_data_array[$exam->getSubjectName()][$exam->getYear()])) {
+            
+                $this->exam_data_array[$exam->getSubjectName()][$exam->getYear()] = array();
+
+                array_push($this->exam_data_array[$exam->getSubjectName()][$exam->getYear()], $exam);
+           
+            }else{
+                
+                array_push($this->exam_data_array[$exam->getSubjectName()][$exam->getYear()], $exam);
+
+            }
+
+        }
+
+
+    }
 
     /**
      * Group exams with certain rules
      *
-     * @param null
+     * @param $option [set true to return a JSON representation]
      * 
      * @return array[subject][year]
      * 
      **/
 
-    public function group()
+    public function group($option)
     {
-    	$output = array();
-        
+    	
+        $output = array();
+
         //group by exam names
 
-        foreach ($this->exam_data_array as Exam $exam){
+        foreach ($this->exam_data_array as $exam){
 
-        	if (!$output[$exam->getSubjectName()]) {
+        	if (!isset($output[$exam->getSubjectName()])) {
 
         		$output[$exam->getSubjectName()] = array();
+
+                array_push($output[$exam->getSubjectName()], $exam);
 
         	}else{
 
@@ -87,9 +146,11 @@ class ExamFactory
 
         	foreach ($exams as $exam){
 
-        		if (!$year_output[$exam->getYear()]) {
+        		if (!isset($year_output[$exam->getYear()])) {
 
         			$year_output[$exam->getYear()] = array();
+
+                    array_push($year_output[$exam->getYear()], $exam);
         		
         		}else{
 
@@ -98,7 +159,7 @@ class ExamFactory
         		}
         	}
             
-            $output[$subjects] = $year_output;
+            $output[$subject] = $year_output;
         }
     	
         //clean cache
@@ -109,4 +170,23 @@ class ExamFactory
 
 
 
+
+    /**
+     * Gets the value of exam_data_array.
+     *
+     * @param Boolean $option [set true to return JSON]
+     *
+     * @return mixed
+     */
+    public function getExamDataArray($option = false)
+    {
+
+        if ($option) {
+            
+            return json_encode($this->exam_data_array);
+
+        }
+
+        return $this->exam_data_array;
+    }
 }

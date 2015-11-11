@@ -4,9 +4,12 @@ namespace VCAA\controllers;
 use VCAA\exam\Exam;
 use VCAA\exam\ExamFactory;
 
+
 require_once('config.php');
+
 require_once(LIB_URL."simple_html_dom.php");
 require_once(LIB_URL."zipstream.php");
+
 require_once(CLASS_URL."helper.php");
 
 /**
@@ -23,7 +26,7 @@ class ExamFetchController
 
     private $is_paper; private $is_report; private $fetch_mode;
 
-    private ExamFactory $factory;
+    private $factory;
 
     /**
      * Constructor
@@ -40,7 +43,7 @@ class ExamFetchController
         $this->context = stream_context_create($schema);
 
         //preload document
-        $this->dom = file_get_html(TEMP_URL,"home.html");
+        $this->dom = file_get_html(TEMP_URL."home.html");
 
         //initialize exam factory
         $this->factory = new ExamFactory();
@@ -52,6 +55,7 @@ class ExamFetchController
      * */
     public function fetch_and_construct($subjects_array = array(),$year_array = array(),$from = null,$to = null)
     {
+
         if (!$this->dom) {
             exit();
         }
@@ -60,15 +64,19 @@ class ExamFetchController
         if ($this->fetch_mode == "single") {
             
             $data = $this->single_mode_construct_subject_year_arrays();
+                
+            error_log("data:".print_r($data,true));
 
-            for ($i=0; $i < count($data); $i++) { 
+            for ($i = 0; $i < count($data); $i++) { 
 
-                $single_subject = $data[$i];
+                if (isset($data[$i])) {
 
-                $single_subject_year_array = $data[$single_subject];
+                    $single_subject = $data[$i];
 
-                //loop
-                $this->real_work((array)$single_subject , $single_subject_year_array);
+                    $single_subject_year_array = $data[$single_subject];
+
+                    $this->real_work((array)$single_subject , (array)$single_subject_year_array);
+                }
 
             }
         }
@@ -94,12 +102,9 @@ class ExamFetchController
 
         }
 
-        $output = $this->factory->group();
+        $output = $this->factory->getExamDataArray(true);
         
-        // Just test
-        //error_log(print_r(json_encode($output,true)));
-        error_log("haha");
-        return 0;
+        return $output;
 
     }
 
@@ -110,9 +115,9 @@ class ExamFetchController
     {
         for ($i=0; $i < count($subjects_array) ; $i++) { 
             
-            $subject_page = file_get_html($this->find_subject_page_url((string)$subjects_array[$i],false,$this->context));
+            $subject_page = file_get_html($this->find_subject_page_url((string)$subjects_array[$i]),false,$this->context);
 
-            foreach ( $subject_page->find('table[class=tablestyle4') as $table){
+            foreach ( $subject_page->find('table[class=tablestyle4]') as $table){
 
                 for ($j=0; $j < count($year_array); $j++) { 
                     
@@ -126,17 +131,17 @@ class ExamFetchController
                             // Check schema
                             $section_to_fetch = null;
 
-                            if ($this->is_exam_paper && $this->is_exam_report) {
+                            if ($this->is_paper && $this->is_report) {
                                 
                                 $section_to_fetch = $tr;
 
                             }
-                            elseif ($this->is_exam_paper) {
+                            elseif ($this->is_paper) {
                                 
                                 $section_to_fetch = $tr->find('td',1);
 
                             }
-                            elseif ($this->is_exam_report){
+                            elseif ($this->is_report){
 
                                 $section_to_fetch = $tr->find('td',2);
 
@@ -154,10 +159,15 @@ class ExamFetchController
                                 $subj_name = (string)$subjects_array[$i];
 
                                 $options = array(
+
                                     'subject_name' => $subj_name,
+
                                     'title' => $title,
+
                                     'year' => $year_title,
-                                    'url' => $link_url);
+
+                                    'url' => $this::$base_url.$link_url
+                                );
 
                                 //Pack exam
                                 $this->factory->package_exam_instance_with_data($options);
@@ -194,6 +204,22 @@ class ExamFetchController
         }
         return null;
     }
+
+    /**
+     * Filter two strings and compare  
+     */
+    private function match($input,$source)
+    {
+        $decodedSource = str_replace("\xc2\xa0",' ',html_entity_decode($source));
+
+        if (preg_replace('/\s+/','',$decodedSource) == $input){
+
+            return true;
+        
+        }
+        return false;
+    }
+
 
     /**
      * Check if the input and whats on the website are the same

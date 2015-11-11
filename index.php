@@ -219,11 +219,11 @@
                                     <h5>
                                         Enter your subject
                                     </h5>
-                                    <input type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required">
+                                    <input value="SpecialistMathematics" type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required">
                                     <h5>
                                         Enter year
                                     </h5>
-                                    <input type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required">
+                                    <input value="2014" type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required">
                                     <br>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@
 
                             <input type="hidden" name="counter" id="counter" />
 
-                        <input type="hidden" name="modeIndicator" id="modeIndicator" value="0">
+                        <input type="hidden" name="modeIndicator" id="modeIndicator" value="single">
 
                         <input type="hidden" name="action" id="action" value="fetch">
 
@@ -273,7 +273,7 @@
                             </div>
                         </div>
                         <input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px">
-                        <input type="hidden" id="modeIndicator" name="modeIndicator" value="1">
+                        <input type="hidden" id="modeIndicator" name="modeIndicator" value="bulk">
                         <input type="hidden" name="action" id="action" value="fetch">
                     </form>
                 </div>
@@ -312,8 +312,8 @@
 </div>
 <script src="assets/php.js" type="text/javascript"></script>
 <script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>
+<!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>-->
 <script src="function.js" type="text/javascript"></script>
 <script>
     //tracking

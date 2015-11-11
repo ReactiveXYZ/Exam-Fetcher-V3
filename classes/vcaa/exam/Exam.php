@@ -1,9 +1,12 @@
 <?php
 namespace VCAA\exam;
+
 /**
 * VCAA Exam instance used to populate
 */
-class Exam
+
+class Exam implements \JsonSerializable
+
 {
     protected $subject_name;
 
@@ -13,9 +16,9 @@ class Exam
 
 	protected $url;
 
-	protected array $options;
+	protected $options;
 	
-	public function __construct($subject_name,$title,$year,$url,array $options = null)
+	public function __construct($subject_name,$title,$year,$url, $options = null)
 	{
 
 		$this->subject_name = $subject_name;
@@ -34,6 +37,23 @@ class Exam
         
 	}
 	
+    public function jsonSerialize()
+    {
+        $information = array(
+
+            'subject_name' => $this->subject_name,
+
+            'title' => $this->title,
+
+            'year' => $this->year,
+
+            'url' => $this->url
+
+        );
+
+        return $information;
+    }
+
     /**
      * Gets the value of name.
      *
@@ -85,4 +105,6 @@ class Exam
     {
         return $this->title;
     }
+
+
 }
