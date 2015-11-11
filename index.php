@@ -11,46 +11,46 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="assets/jquery-ui.css" />
+    <link rel="stylesheet" href="assets/lib/jquery-ui.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src="assets/jquery-2.1.3.min.js"></script>
-    <script src="assets/jquery-ui.js"></script>
+    <script src="assets/lib/jquery-2.1.3.min.js"></script>
+    <script src="assets/lib/jquery-ui.js"></script>
 
     <!-- ICONS ---->
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="assets/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="assets/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
     <link rel="manifest" href="assets/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <!-- Text Core Plugin -->
-    <link rel="stylesheet" href="assets/textext.core.css" />
-    <link rel="stylesheet" href="assets/textext.plugin.autocomplete.css" />
-    <link rel="stylesheet" href="assets/textext.plugin.tags.css" />
-    <script src="assets/textext.core.js"></script>
-    <script src="assets/textext.plugin.autocomplete.js"></script>
-    <script src="assets/textext.plugin.tags.js"></script>
-    <script src="assets/textext.plugin.suggestions.js"></script>
-    <script src="assets/textext.plugin.filter.js"></script>
+    <link rel="stylesheet" href="assets/lib/textext.core.css" />
+    <link rel="stylesheet" href="assets/lib/textext.plugin.autocomplete.css" />
+    <link rel="stylesheet" href="assets/lib/textext.plugin.tags.css" />
+    <script src="assets/lib/textext.core.js"></script>
+    <script src="assets/lib/textext.plugin.autocomplete.js"></script>
+    <script src="assets/lib/textext.plugin.tags.js"></script>
+    <script src="assets/lib/textext.plugin.suggestions.js"></script>
+    <script src="assets/lib/textext.plugin.filter.js"></script>
 
-    <script src="assets/jquery.cookie.js"></script>
+    <script src="assets/lib/jquery.cookie.js"></script>
 
     <!--Others-->
-    <script src='assets/foundation.min.js'></script>
-    <script src="assets/alert.js"></script>
+    <script src='assets/lib/foundation.min.js'></script>
+    <script src="assets/lib/alert.js"></script>
 
-    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
 
     <style>
@@ -210,9 +210,9 @@
                                 <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%">
                                     <p align="center">
                                         <label>
-                                            <input type="checkbox" class="checkbox" name="singlePaperChecked" checked /> Exams |</label>
+                                            <input type="checkbox" class="checkbox" name="single_paper_checked" checked /> Exams |</label>
                                         <label>
-                                            <input type="checkbox" class="checkbox" name="singleReportChecked" checked/> Assessment reports </label>
+                                            <input type="checkbox" class="checkbox" name="single_report_checked" checked/> Assessment reports </label>
                                     </p>
                                 </div>
                                 <div id="field_div_id_0">
@@ -237,7 +237,7 @@
 
                             <input type="hidden" name="counter" id="counter" />
 
-                        <input type="hidden" name="modeIndicator" id="modeIndicator" value="single">
+                        <input type="hidden" name="mode_indicator" id="mode_indicator" value="single">
 
                         <input type="hidden" name="action" id="action" value="fetch">
 
@@ -253,9 +253,9 @@
                         <div class="checkboxes" style="display: inline-block;margin: 0 auto;width:100%">
                             <p align="center">
                                 <label>
-                                    <input type="checkbox" class="checkbox" name="bulkPaperChecked" checked /> Exams |</label>
+                                    <input type="checkbox" class="checkbox" name="bulk_paper_checked" checked /> Exams |</label>
                                 <label>
-                                    <input type="checkbox" class="checkbox" name="bulkReportChecked" checked/> Assessment reports </label>
+                                    <input type="checkbox" class="checkbox" name="bulk_report_checked" checked/> Assessment reports </label>
                             </p>
                         </div>
                         <div style="">
@@ -273,7 +273,7 @@
                             </div>
                         </div>
                         <input type="submit" id="submit" name="submit" value="Click to view the exams!" style="margin-top: 20px">
-                        <input type="hidden" id="modeIndicator" name="modeIndicator" value="bulk">
+                        <input type="hidden" id="mode_indicator" name="mode_indicator" value="bulk">
                         <input type="hidden" name="action" id="action" value="fetch">
                     </form>
                 </div>
@@ -283,12 +283,13 @@
                 <div class="extraction">
                     <h3>Extraction mode provides a single gateway for extracting exam appendices, including formula sheet, data boolets etc... This database is
                     constantly updating. If you want your subject's extraction to be added, please contact <a href="mailto:service@fistudio.net">service@fistudio.net</a> </h3>
-                    <form id="eform" method="post" action="function.php">
+                    <form id="eform" method="post" action="site/interact.php">
                         <div>
                             <h5>Enter a subject:</h5>
                             <input id="ext_subject" placeholder="Type a few characters and select an extraction" name="ext_subject" class="form__input" style="width:100% !important;" required="required">
                             <input type="hidden" name="ext_selected" id="ext_selected">
-                            <input type="hidden" name="action" value="ext_download" >
+                            <input type="hidden" name="action" value="fetch">
+                            <input type="hidden" name="mode_indicator" value="extraction">
                             <input type="submit" id="submit" value="Click to download now">
                         </div>
                     </form>
@@ -310,7 +311,7 @@
     <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:service@fistudio.net>FISTUDIO</a> </h5>
 
 </div>
-<script src="assets/php.js" type="text/javascript"></script>
+<script src="assets/js/str_replace.js" type="text/javascript"></script>
 <script type="text/javascript">var switchTo5x=true;</script>
 <!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "7bbc3094-02cb-416d-a3b2-513f8c5c2b05"});</script>-->

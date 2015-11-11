@@ -96,14 +96,23 @@ class ExamDownloaderController
 
 		}
 
-		$file = file_get_contents($url);
+		try {
+			$file = file_get_contents($url);
 
-		$open_stream = fopen($fileDir.'/'.$filename, 'w');
+			$open_stream = fopen($fileDir.'/'.$filename, 'w');
 
-		fwrite($fo, $file);
+			fwrite($fo, $file);
 
-		fclose($fo);
+			fclose($fo);
 
+		} catch (Exception $e) {
+			
+			error_log($e->getMessage());
+
+			return false;
+
+		}
+		
 		return true;
 	
 	}
