@@ -58,9 +58,9 @@ class ExamDownloaderController
 		setcookie('fileLoading',true,time()+10,'/');
 
 		// create ZipStream
-		$zipStream = new ZipStream('Exams.zip');
+		$zipStream = new \ZipStream('Exams.zip');
 
-        foreach ($data as $item){
+        /*foreach ($data as $item){
 
             //Add files
             $filesInDirectory = $item["value"];
@@ -73,7 +73,26 @@ class ExamDownloaderController
                 //Add to zip
                 $zipStream -> add_file($item["key"]."/".basename($file),$downloaded_file);
             }
+        }*/
+
+        foreach ($data as $subject => $years) {
+
+        	foreach ($years as $year => $exams){
+
+        		foreach ($exams as $exam) {
+
+        			// Pull the file
+        			$file = file_get_contents($exam['url']);
+
+        			// Add to zip
+        			$zipStream -> add_file($subject."/".$year."/".basename($exam['url']),$file);
+
+        		}
+
+        	}
+
         }
+
 
         $zipStream->finish();
 

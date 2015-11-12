@@ -11,7 +11,7 @@ use VCAA\controllers\ExamDownloaderController;
 // ================ Post Request Receivers =================
 
 $post_action = get_post('action');
-error_log("retrieved by methods:".$post_action."\n Retrieved with plain php: ".$_POST['action']);
+
 switch ($post_action) {
 
 	case 'fetch': {
@@ -39,11 +39,11 @@ switch ($post_action) {
 				$single_report_checked = false;
 			}
 			
-			$controller = new ExamFetchController($single_paper_checked,$singleReportChecked,$mode_indicator);
+			$controller = new ExamFetchController($single_paper_checked,$single_report_checked,$mode_indicator);
 
 			echo $controller -> fetch_and_construct();
 
-			exit("Single mode data returned");
+			exit();
 		}
 
 		if ($mode_indicator == "bulk") {
@@ -56,6 +56,15 @@ switch ($post_action) {
 
 				$bulk_paper_checked = false;
 
+			}
+
+			if (isset($_POST['bulk_report_checked'])) {
+
+				$bulk_report_checked = true;
+
+			}else{
+
+				$bulk_report_checked = false;
 			}
 
 			$controller = new ExamFetchController($bulk_paper_checked,$bulk_report_checked,$mode_indicator);
@@ -78,7 +87,7 @@ switch ($post_action) {
 
 			}
 
-			exit('Bulk mode data returned');
+			exit();
 
 		}
 
@@ -101,6 +110,7 @@ switch ($post_action) {
 		$data_to_download = json_decode(get_post('download'),true);
 
 		ExamDownloaderController::download_to_zip($data_to_download);
+		//error_log(print_r($data_to_download,true));
 
 	}
 		

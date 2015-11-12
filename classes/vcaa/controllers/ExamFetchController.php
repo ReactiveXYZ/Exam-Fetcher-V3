@@ -65,8 +65,6 @@ class ExamFetchController
             
             $data = $this->single_mode_construct_subject_year_arrays();
                 
-            error_log("data:".print_r($data,true));
-
             for ($i = 0; $i < count($data); $i++) { 
 
                 if (isset($data[$i])) {
@@ -103,7 +101,7 @@ class ExamFetchController
         }
 
         $output = $this->factory->getExamDataArray(true);
-        
+        error_log(print_r($output,true));
         return $output;
 
     }
@@ -132,12 +130,12 @@ class ExamFetchController
                             $section_to_fetch = null;
 
                             if ($this->is_paper && $this->is_report) {
-                                
+
                                 $section_to_fetch = $tr;
 
                             }
                             elseif ($this->is_paper) {
-                                
+
                                 $section_to_fetch = $tr->find('td',1);
 
                             }
@@ -212,7 +210,9 @@ class ExamFetchController
     {
         $decodedSource = str_replace("\xc2\xa0",' ',html_entity_decode($source));
 
-        if (preg_replace('/\s+/','',$decodedSource) == $input){
+        $converted_input = str_replace(" ", '', $input);
+
+        if (preg_replace('/\s+/','',$decodedSource) == $converted_input){
 
             return true;
         

@@ -259,16 +259,6 @@ $(document).ready(function(){
         }
     });
 
-    /*stWidget.addEntry({
-        "service":"sharethis",
-        "element":document.getElementById('share_container'),
-        "url":document.domain,
-        "title":"Share exam fetcher to your friends!",
-        "type":"large",
-        "text":"Share this" ,
-        "summary":"I just downloaded VCAA exams using exam fetcher! A convenient tool for fetching exam! Go check it out!"
-    });*/
-
 });
 
 
@@ -405,7 +395,7 @@ $("body").on('submit','#sform',function(e){
     showPreloader();
 
     var postData = $(this).serializeArray();
-    var formURL = 'function_test.php';
+    var formURL = 'site/interact.php';
 
     $.ajax({
         url: formURL,
@@ -928,25 +918,6 @@ $('body').on('click','#share-exams',function(e){
     var dataString = JSON.stringify(data);
     var downloadURL = document.domain+"/function.php?remote-download="+btoa(dataString);
 
-    //Add entry if i can
-    if ($('#st_fb').children().length < 1){
-        stWidget.addEntry({
-            "service":"email",
-            "element":document.getElementById('st_email'),
-            "url":downloadURL,
-            "title":"Share exams to facebook!",
-            "type":"large",
-            "summary":"Here's the link attached! Click to download now!"
-        });
-        stWidget.addEntry({
-            "service":"facebook",
-            "element":document.getElementById('st_fb'),
-            "url":downloadURL,
-            "title":"Share exams to your friends' email!",
-            "type":"large",
-            "summary":"Here's the link attached! Click to download now!"
-        });
-
     }
 
     $('#generate-link').click(function (e) {
@@ -1088,6 +1059,7 @@ function postResultData (val,action) {
     theForm = document.createElement('form');
     theForm.action = 'function.php';
     theForm.method = 'post';
+    
     // Next create the <input>s in the form and give them names and values
     newInput1 = document.createElement('input');
     newInput1.type = 'hidden';
@@ -1154,7 +1126,6 @@ function createInformationalAlertWithTitleAndDelay(title,delay,isSuccess){
     }else{
         alert(title);
     }
-
 }
 
 // show/hide preloader
