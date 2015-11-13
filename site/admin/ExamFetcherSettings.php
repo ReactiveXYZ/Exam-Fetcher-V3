@@ -1,6 +1,5 @@
 <?php 
-
-require_once ('config.php');
+require_once ('../../../classes/vcaa/controllers/config.php');
 
 /**
 * Extra settings for the VCAA fetcher site

@@ -1,3 +1,15 @@
+<?php
+    require_once('site/announcements.php');
+
+    // Initialize announcement instance
+    $annoucement = new announcements();
+
+    // Retrieve the data from announcement system
+    $data = $announcement->receive_announcement();
+
+    //@todo -> Test announcement system
+?>
+
 <html>
     <head>
         <title>Exam Fetcher (VCAA)</title>

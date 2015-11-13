@@ -1,26 +1,49 @@
 <?php
+require ('vendor/autoload.php');
+
+use VCAA\db\DatabaseRequest;
 
 /**
 * Receive and trigger announcements if any
 */
-
-
 class Announcements
 {
-	
+	protected $announcement_connection;
+
 	public function __construct()
 	{
-		
+		$this->announcement_connection = new DatabaseRequest('posts');
 	}
 
-	public function receive_announcements()
-	{
-		
+	/**
+	 * Receive announcement as HTML
+	 **/
+	public function receive_announcement()
+	{	
+		if (isset($_COOKIE['latest_read'])) {
+			
+			$current_id = $_COOKIE['latest_read'];
+
+			$latest_post = $this->announcement_connection->get_latest_post($current_id);
+
+			if ($latest_post == 0) {
+				
+				return 0;
+
+			}else{
+
+				return $latest_post;
+
+			}
+		}else{
+
+			setcookie('latest_read','-1',time() + (86400 * 365), "/");
+
+			receive_announcement();
+
+		}
 	}
 
-    private function check_new()				
-    {
-       
-    }    
+
 }
 

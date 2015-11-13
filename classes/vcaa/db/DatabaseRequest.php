@@ -10,7 +10,7 @@ class DatabaseRequest
 	
 	//@todo : set db config here
 
-	private $username = "",$password = "",$db_name = "",$table_name;
+	private $username = "root",$password = "root",$db_name = "vcaa_exam_fetcher",$host_name = "localhost",$table_name;
     
     protected $connection;
 
@@ -22,14 +22,13 @@ class DatabaseRequest
 	 * @return void  
 	 * 
 	 **/
-
 	public function __construct($table_name)
 	{
         
-		//Establish Connection
-	    $this->connection = new mysqli($this->db_name,$this->username,$this->password);
+		// Establish Connection
+	    $this->connection = new \mysqli($this->host_name,$this->username,$this->password,$this->db_name);
 
-	    if ($this->connection->connect_error) {
+	    if (mysqli_connect_error()) {
 
 	    	die("Connection Failed");
 	    
@@ -38,6 +37,66 @@ class DatabaseRequest
 		$this->table_name = $table_name;
 	}
     
+    /**
+     * Add a new post to the database
+     **/
+    public function add_post($html)
+    {	
+    	$tbname = $this->table_name;
+
+    	$sql = "INSERT INTO $tbname (content) VALUES ('$html')";
+
+    	if ($this->connection->query($sql) === true) {
+
+    		return true;
+
+    	}
+
+    	return false;
+
+    }
+
+    /**
+     * Get latest post 
+     **/
+    public function get_latest_post($current_id)
+    {	
+    	if ($this->has_new_post($current_id)) {
+    		
+    		$sql = "SELECT content FROM $this->table_name ORDER BY id DESC LIMIT 1";
+
+    		$result = $this->connection->query($sql);
+
+    		return $result->fetch_assoc()['content'];
+
+    	}
+
+        return 0;
+    }
+
+    /**
+     * Check if the current read post is the lastest one
+     * */
+    private function has_new_post($current_id)
+    {
+    	$sql = "SELECT max(id) AS maxid FROM $table_name LIMIT 1";
+
+    	$row = $this->connection->query($sql)->row();
+
+    	if ($row) {
+    		
+    		if ($row->maxid > $current_id) {
+    			
+    			return true;
+
+    		}
+
+    	}
+    	
+    	return false;
+
+    }
+
     /**
      * retrieve pages to cut
      * 
@@ -81,4 +140,14 @@ class DatabaseRequest
 	}
     
 
+
+    /**
+     * Gets the value of connection.
+     *
+     * @return mixed
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
 }
