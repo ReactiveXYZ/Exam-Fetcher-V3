@@ -1,5 +1,5 @@
 <?php
-require ('vendor/autoload.php');
+//require ('../vendor/autoload.php');
 
 use VCAA\db\DatabaseRequest;
 
@@ -39,7 +39,7 @@ class Announcements
 
 			setcookie('latest_read','-1',time() + (86400 * 365), "/");
 
-			receive_announcement();
+			return $this->announcement_connection->get_latest_post(-1);
 
 		}
 	}

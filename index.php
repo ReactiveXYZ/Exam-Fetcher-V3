@@ -1,13 +1,15 @@
 <?php
-    require_once('site/announcements.php');
+    require ('vendor/autoload.php');
+
+    require ('site/announcements.php');
 
     // Initialize announcement instance
-    $annoucement = new announcements();
+    $announcement = new Announcements();
 
     // Retrieve the data from announcement system
     $data = $announcement->receive_announcement();
 
-    //@todo -> Test announcement system
+    error_log($data);
 ?>
 
 <html>

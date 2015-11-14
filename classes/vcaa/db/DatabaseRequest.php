@@ -42,6 +42,7 @@ class DatabaseRequest
      **/
     public function add_post($html)
     {	
+    	
     	$tbname = $this->table_name;
 
     	$sql = "INSERT INTO $tbname (content) VALUES ('$html')";
@@ -79,7 +80,7 @@ class DatabaseRequest
      * */
     private function has_new_post($current_id)
     {
-    	$sql = "SELECT max(id) AS maxid FROM $table_name LIMIT 1";
+    	$sql = "SELECT max(id) AS maxid FROM $this->table_name LIMIT 1";
 
     	$row = $this->connection->query($sql)->row();
 
