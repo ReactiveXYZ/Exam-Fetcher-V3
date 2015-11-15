@@ -26,15 +26,8 @@ class Announcements
 
 			$latest_post = $this->announcement_connection->get_latest_post($current_id);
 
-			if ($latest_post == 0) {
-				
-				return 0;
+			return $latest_post;
 
-			}else{
-
-				return $latest_post;
-
-			}
 		}else{
 
 			setcookie('latest_read','-1',time() + (86400 * 365), "/");

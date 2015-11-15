@@ -63,12 +63,16 @@ class DatabaseRequest
     public function get_latest_post($current_id)
     {	
     	if ($this->has_new_post($current_id)) {
-    		
-    		$sql = "SELECT content FROM $this->table_name ORDER BY id DESC LIMIT 1";
+
+    	    $tbname = $this->table_name;
+
+    		$sql = "SELECT content FROM $tbname ORDER BY id DESC LIMIT 1";
 
     		$result = $this->connection->query($sql);
+            
+            $fetched_content = $result->fetch_assoc()['content'];
 
-    		return $result->fetch_assoc()['content'];
+    		return $fetched_content;
 
     	}
 
@@ -80,14 +84,18 @@ class DatabaseRequest
      * */
     private function has_new_post($current_id)
     {
-    	$sql = "SELECT max(id) AS maxid FROM $this->table_name LIMIT 1";
+        $tbname = $this->table_name;
 
-    	$row = $this->connection->query($sql)->row();
+    	$sql = "SELECT max(id) AS 'maxid' FROM $tbname LIMIT 1";
 
-    	if ($row) {
+    	$max_id = $this->connection->query($sql)->fetch_assoc()['maxid'];
+
+    	if ($max_id) {
     		
-    		if ($row->maxid > $current_id) {
-    			
+    		if ($max_id > $current_id) {
+
+                setcookie('latest_read',$max_id,time() + (86400 * 365), "/");
+
     			return true;
 
     		}

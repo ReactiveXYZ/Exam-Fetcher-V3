@@ -9,7 +9,6 @@
     // Retrieve the data from announcement system
     $data = $announcement->receive_announcement();
 
-    error_log($data);
 ?>
 
 <html>
@@ -73,6 +72,20 @@
         <div class="centered grid__col--10" id="main" style="margin-top: 5%">
             <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V3 (Omega).</h1>
             <h3 style="text-align: center"><a id="advanced-settings" style="cursor: pointer;"> <i class="fa fa-cogs"></i> Settings</a></h3>
+            <!-- Modal Announcement -->
+            <div class="modal-frame" id="modal-news">
+                <div class="modal">
+                    <div class="modal-inset">
+                        <div class="button close-modal" id="close-news">Close</div>
+                        <div id="modal-news-body" class="modal-body">
+                            <h3>Some latest news !</h3>
+                            <br/>
+                            <?php echo $data; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Modal Share Exams -->
             <div class="modal-frame" id="modal-exam">
                 <div class="modal">
@@ -105,6 +118,7 @@
                 </div>
             </div>
             <div class="modal-overlay"></div>
+
             <!--- Floating Buttons -->
             <div id="container-floating">
                 <div title="Unihigh Login (Comming Soon)" class="nd1 nds" id="unihigh-login">
@@ -115,6 +129,7 @@
                     <img class="edit" src="http://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
                 </div>
             </div>
+
             <!-- Slide Menu & Tag-Cloud -->
             <div class="slideItWrapper">
                 <a href="#modal" class="slideIt">
@@ -253,6 +268,7 @@
         <script>
             //tracking
             setInterval(function() {
+
                 if ($.cookie("fileLoading")) {
                     // Remove cookie
                     $.removeCookie('fileLoading', {
@@ -261,7 +277,42 @@
                     // Success
                     createInformationalAlertWithTitleAndDelay("Success!", 1700, true);
                 }
+
             }, 1000);
+
+            //news fetching
+            var newsContent = document.getElementById('modal-news-body').innerHTML;
+
+            if (parseInt(newsContent) != "0") {
+
+                // Trigger pop up
+                $modal_news = $('#modal-news');
+
+                $overlay_news = $('.modal-overlay');
+
+                $modal_news.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
+                    
+                    if($modal_news.hasClass('state-leave')) {
+                    
+                        $modal_news.removeClass('state-leave');
+                    
+                    }
+                });
+
+                $('#close-news').on('click', function(){
+
+                    $overlay_news.removeClass('state-show');
+
+                    $modal_news.removeClass('state-appear').addClass('state-leave');
+                });
+
+                // Open modal
+                $overlay_news.addClass('state-show');
+
+                $modal_news.removeClass('state-leave').addClass('state-appear');
+
+            };
+
         </script>
     </body>
 </html>

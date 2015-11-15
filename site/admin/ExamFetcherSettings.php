@@ -1,6 +1,8 @@
 <?php 
 require_once ('../../../classes/vcaa/controllers/config.php');
+require_once ('../../../vendor/autoload.php');
 
+use VCAA\db\DatabaseRequest;
 /**
 * Extra settings for the VCAA fetcher site
 */
@@ -36,5 +38,14 @@ class ExamFetcherSettings
         }
 
 	}
+
+    /**
+     * Enter maintanence mode of exam fetcher
+     * */
+    public static function enter_maintenance_mode(DatabaseRequest request){
+
+
+
+    }
 
 }

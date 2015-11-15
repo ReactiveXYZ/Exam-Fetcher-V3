@@ -45,6 +45,14 @@ switch ($action) {
 	}
 		break;
 
+	case 'enter-maintanence':{
+
+		
+
+	}
+	
+		break;
+
 	default:
 		
 		echo "503 Forbbiden";
