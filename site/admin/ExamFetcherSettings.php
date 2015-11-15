@@ -40,11 +40,37 @@ class ExamFetcherSettings
 	}
 
     /**
+     * 
      * Enter maintanence mode of exam fetcher
+     * 
      * */
-    public static function enter_maintenance_mode(DatabaseRequest request){
+    public static function enter_maintenance_mode(DatabaseRequest $request){
 
+        if ($request->enter_maintenance_mode()) {
+            
+            return true;
 
+        }
+
+        return false;
+
+    }
+
+    /**
+     *
+     * Check if in maintanence
+     * 
+     */
+    public static function check_if_in_maintance(DatabaseRequest $request)
+    {
+        
+        if ($request->check_maintanence()) {
+            
+            return true;
+
+        }
+
+        return false;
 
     }
 

@@ -27,7 +27,7 @@
 
 <?php } else { ?>	
 
-	<h2> Welcome admin! this page currently looks crap, but anyways, just bear it in mind... </h2>
+	<h2> Welcome admin! this page currently looks shit, but anyways, just bear it in mind... </h2>
 
 	<section>
 		<h3>News management:</h3>
@@ -56,7 +56,7 @@
 
 		<button id="refresh-cache">Refresh cache</button>
 
-		<button id="enter-maintenance">Enter maintanence</button>
+		<button id="enter-maintanence">Enter maintanence</button>
 
 	</section>
 		

@@ -47,7 +47,21 @@ switch ($action) {
 
 	case 'enter-maintanence':{
 
-		
+		$site_option_conn = new DatabaseRequest('site_options');
+
+		if (ExamFetcherSettings::enter_maintenance_mode($site_option_conn)) {
+			
+			echo "Success";
+
+		}else{
+
+			echo "Failure";
+
+		}
+
+	    $site_option_conn->getConnection()->close();
+
+	    exit();
 
 	}
 	

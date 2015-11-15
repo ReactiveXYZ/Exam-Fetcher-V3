@@ -36,6 +36,58 @@ class DatabaseRequest
        
 		$this->table_name = $table_name;
 	}
+
+    /**
+     * Enter maintainence mode
+     *         
+     * @return boolean 
+     * 
+     */
+    public function enter_maintanence()
+    {
+        
+        $tbname = $this->table_name;
+
+        $sql = "UPDATE $tbname SET value = '1' WHERE option = 'maintanence' ";
+
+        if ($this->connection->query($sql) === true) {
+            
+            return true;
+
+        }
+
+        return false;
+        
+
+    }
+
+    /**
+     * Check if the site is in maintanence mode
+     *     
+     * @return boolean Determine if the site is in maintanence
+     * 
+     */
+    public function check_maintanence()
+    {
+
+        $tbname = $this->table_name;
+
+        $sql = "SELECT value FROM $tbname WHERE name = 'maintanence'";
+
+        $result = $this->connection->query($sql);
+
+        $value = $result->fetch_assoc()['value'];
+
+        if ((string)$value == "0") {
+            
+            return false;
+
+        }
+
+        return true;
+
+    }
+
     
     /**
      * Add a new post to the database

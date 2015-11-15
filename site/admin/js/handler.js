@@ -1,3 +1,4 @@
+
 $('#post-form').submit(function (e){
 
 	e.preventDefault();
@@ -27,7 +28,7 @@ $('#post-form').submit(function (e){
 });
 
 
-$('refresh-cache').click(function(e){
+$('#refresh-cache').click(function(e){
 
 	e.preventDefault();
 
@@ -50,6 +51,38 @@ $('refresh-cache').click(function(e){
 		error: function (response) {
 
 			alert('success');
+
+		}
+
+	});
+
+});
+
+$('#enter-maintanence').click(function(e){
+
+	e.preventDefault();
+
+	$.ajax({
+
+		type:"post",
+
+		url:"classes/action.php",
+
+		data: {
+
+			"action" : "maintanence"
+
+		},
+
+		success: function (response) {
+
+			alert('Success: ' + response);
+
+		},
+
+		error: function (response) {
+
+			alert('Error: ' + response);
 
 		}
 

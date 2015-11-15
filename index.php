@@ -1,7 +1,22 @@
 <?php
     require ('vendor/autoload.php');
 
-    require ('site/announcements.php');
+    require_once ('site/admin/ExamFetcherSettings.php');
+
+    require_once ('site/announcements.php');
+
+    // Check if in maintanence
+    $site_option_conn = new DatabaseRequest('site_options');
+
+    if (ExamFetcherSettings::check_maintanence($site_option_conn)) {
+        
+        $is_maintanence = true;
+
+    }else{
+
+        $is_maintanence = false;
+
+    }
 
     // Initialize announcement instance
     $announcement = new Announcements();
@@ -11,6 +26,11 @@
 
 ?>
 
+<?php 
+    
+    if (!$is_maintanence) {
+
+?>
 <html>
     <head>
         <title>Exam Fetcher (VCAA)</title>
@@ -316,3 +336,9 @@
         </script>
     </body>
 </html>
+
+<?php } else { ?>
+
+    Sorry, we are currently in maintanence mode. Please come back later!
+
+<?php } ?>
