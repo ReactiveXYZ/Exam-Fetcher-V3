@@ -60,21 +60,6 @@ class ExamDownloaderController
 		// create ZipStream
 		$zipStream = new \ZipStream('Exams.zip');
 
-        /*foreach ($data as $item){
-
-            //Add files
-            $filesInDirectory = $item["value"];
-
-            foreach ($filesInDirectory as $file){
-
-                //Download file
-                $downloaded_file = file_get_contents($file);
-
-                //Add to zip
-                $zipStream -> add_file($item["key"]."/".basename($file),$downloaded_file);
-            }
-        }*/
-
         foreach ($data as $subject => $years) {
 
         	foreach ($years as $year => $exams){

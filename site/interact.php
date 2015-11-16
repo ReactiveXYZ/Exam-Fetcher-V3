@@ -93,7 +93,7 @@ switch ($post_action) {
 
 		if ($mode_indicator == "extraction") {
 			
-			$file = REPO_URL.get_post('ext_selected');
+			$file = REPO_URL.'appendices/'.get_post('ext_selected');
 
 			$filename = get_post('ext_subject');
 

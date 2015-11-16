@@ -1,5 +1,5 @@
 // ========== INITIALIZATION ===========
-var searchIndex = ["Accounting", "Agricultural and Horticultural Studies", "Albanian", "Arabic", "Armenian", "Art", "Auslan", "Australian History", "AustralianPolitics", "Bengali", "Biology", "Bosnian", "Business(VCEVET)", "Business Management", "Chemistry", "Chinese FirstLanguage", "ChineseSecondLanguage", "ChineseSecondLanguageAdvanced", "Classical Studies", "Community Services(VCEVET)", "Contemporary Australian Society", "Croatian", "Czech", "Dance", "Dance(VCEVET)", "Drama", "Dutch", "Economics", "Engineering Studies(VCEVET)", "English", "English as an Additional Language(EAL)", "English Language", "Environmental Science", "Equine Studies(VCEVET)", "Extended Investigation", "Filipino", "Financial Services(VCEVET)", "Food and Technology", "French", "Furnishing(VCEVET)", "Further Mathematics", "General Achievement Test(GAT)", "Geography", "German", "Greek", "Global Politics", "Health and Human Development", "Hebrew", "Hindi", "History", "Australian History", "Renaissance Italy", "Revolutions", "Hospitality(VCEVET)", "Hospitality", "Hospitality-Kitchen Operations", "Hungarian", "Indigenous Languages of Victoria", "Indonesian First Language", "Indonesian Second Language", "Industry and Enterprise", "Information Technology", "IT Applications", "Software Development", "Information and CommunicationsTechnology(VCEVET)", "Integrated Technologies(VCEVET)", "Interactive Digital Media(VCEVET)", "Italian", "Japanese First Language", "Japanese Second Language", "Khmer", "Korean First Language", "Korean Second Language", "Laboratory Skills(VCEVET)", "Latin", "Latvian", "LegalStudies", "Literature", "Lithuanian", "Macedonian", "Maltese", "Mathematics", "Further Mathematics", "Mathematical Methods(CAS)", "Media", "Music", "CertificateIII in Music(VCEVET)", "CertificateIII in Music(TechnicalProduction)(VCEVET)", "Music Investigation", "Music Performance", "Music Style and Composition", "Outdoor and EnvironmentalStudies", "Persian", "Philosophy", "PhysicalEducation", "Physics", "Polish", "Political Studies", "Portuguese", "Product Design and Technology", "Psychology", "Punjabi", "Religion and Society", "Revolutions", "Romanian", "Russian", "Serbian", "Sinhala", "Slovenian", "Sociology", "Spanish", "Specialist Mathematics", "Sport and Recreation(VCEVET)", "Studio Arts", "Swedish", "Systems Engineering", "Tamil", "Technology", "Product Design and Technology", "Texts and Traditions", "Theatre Studies", "Turkish", "Ukrainian", "Vietnamese", "Visual Communication Design", "Yiddish"];  
+var searchIndex = ["Accounting", "Agricultural and Horticultural Studies", "Albanian", "Arabic", "Armenian", "Art", "Auslan", "Australian History", "Australian Politics", "Bengali", "Biology", "Bosnian", "Business(VCEVET)", "Business Management", "Chemistry", "Chinese First Language", "Chinese Second Language", "Chinese Second Language Advanced", "Classical Studies", "Community Services(VCEVET)", "Contemporary Australian Society", "Croatian", "Czech", "Dance", "Dance(VCEVET)", "Drama", "Dutch", "Economics", "Engineering Studies(VCEVET)", "English", "English as an Additional Language(EAL)", "English Language", "Environmental Science", "Equine Studies(VCEVET)", "Extended Investigation", "Filipino", "Financial Services(VCEVET)", "Food and Technology", "French", "Furnishing(VCEVET)", "Further Mathematics", "General Achievement Test(GAT)", "Geography", "German", "Greek", "Global Politics", "Health and Human Development", "Hebrew", "Hindi", "History", "Australian History", "Renaissance Italy", "Revolutions", "Hospitality(VCEVET)", "Hospitality", "Hospitality-Kitchen Operations", "Hungarian", "Indigenous Languages of Victoria", "Indonesian First Language", "Indonesian Second Language", "Industry and Enterprise", "Information Technology", "IT Applications", "Software Development", "Information and Communications Technology(VCEVET)", "Integrated Technologies(VCEVET)", "Interactive Digital Media(VCEVET)", "Italian", "Japanese First Language", "Japanese Second Language", "Khmer", "Korean First Language", "Korean Second Language", "Laboratory Skills(VCEVET)", "Latin", "Latvian", "Legal Studies", "Literature", "Lithuanian", "Macedonian", "Maltese", "Mathematics", "Further Mathematics", "Mathematical Methods(CAS)", "Media", "Music", "Certificate III in Music(VCEVET)", "CertificateIII in Music(Technical Production)(VCEVET)", "Music Investigation", "Music Performance", "Music Style and Composition", "Outdoor and Environmental Studies", "Persian", "Philosophy", "Physical Education", "Physics", "Polish", "Political Studies", "Portuguese", "Product Design and Technology", "Psychology", "Punjabi", "Religion and Society", "Revolutions", "Romanian", "Russian", "Serbian", "Sinhala", "Slovenian", "Sociology", "Spanish", "Specialist Mathematics", "Sport and Recreation(VCEVET)", "Studio Arts", "Swedish", "Systems Engineering", "Tamil", "Technology", "Product Design and Technology", "Texts and Traditions", "Theatre Studies", "Turkish", "Ukrainian", "Vietnamese", "Visual Communication Design", "Yiddish"];  
 var years = ["2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002"];
 var extractionList = {
     'Specialist Math Formula Sheet':'specialist-math-formula-sheet.pdf',
@@ -123,22 +123,22 @@ $(document).ready(function(){
         if($('#pageslide').is(':visible')) {  //if visible then hide it
             $('#pageslide').animate({
                 left: '-'+slideWidth
-            }, 400, function(){
+            }, 600, function(){
                 $('#pageslide').hide();
             } );
             $('body').animate({
                 marginLeft: '0'
-            }, 400 );
+            }, 600 );
 
             $('.slideIt span').text('☰');
         }
         else{                                //else show it
             $('#pageslide').show().animate({
                 left: '0'
-            }, 400 );
+            }, 600 );
             $('body').animate({
-                marginLeft: window.innerWidth*0.05
-            }, 400 );
+                marginLeft: window.innerWidth*0.20
+            }, 600 );
         }
     });
 

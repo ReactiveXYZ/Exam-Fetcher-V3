@@ -3,7 +3,7 @@ namespace VCAA\controllers;
 
 use VCAA\exam\Exam;
 use VCAA\exam\ExamFactory;
-
+use VCAA\db\DatabseRequest;
 
 require_once('config.php');
 
@@ -28,6 +28,8 @@ class ExamFetchController
 
     private $factory;
 
+    private $subject_options_conn;
+
     /**
      * Constructor
      * */
@@ -40,6 +42,7 @@ class ExamFetchController
 
         //generate context for UA
         $schema = array('http' => array('user_agent' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'));
+
         $this->context = stream_context_create($schema);
 
         //preload document
@@ -47,6 +50,9 @@ class ExamFetchController
 
         //initialize exam factory
         $this->factory = new ExamFactory();
+
+        //initialize subject options
+        $this->subject_options_conn = new DatabseRequest('subject_options');
 
 	}
 
@@ -101,7 +107,7 @@ class ExamFetchController
         }
 
         $output = $this->factory->getExamDataArray(true);
-        error_log(print_r($output,true));
+
         return $output;
 
     }
@@ -113,6 +119,10 @@ class ExamFetchController
     {
         for ($i=0; $i < count($subjects_array) ; $i++) { 
             
+            //Check if the exam can be processed
+            //$needs_to_be_cut = $this->subject_options_conn->get_processed_document((string)$subjects_array[$i]);
+
+            //Start working
             $subject_page = file_get_html($this->find_subject_page_url((string)$subjects_array[$i]),false,$this->context);
 
             foreach ( $subject_page->find('table[class=tablestyle4]') as $table){
@@ -166,6 +176,7 @@ class ExamFetchController
 
                                     'url' => $this::$base_url.$link_url
                                 );
+                                
 
                                 //Pack exam
                                 $this->factory->package_exam_instance_with_data($options);
@@ -308,5 +319,12 @@ class ExamFetchController
         return $result;
     }
     
+    /**
+     * Convert filename to file url
+     * */
+    private function convert_filename_to_url($filename)
+    {
+        return REPO_URL.'processed/'.$filename;
+    }
 
 }

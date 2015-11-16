@@ -47,7 +47,8 @@
 	<section>
 
 		<h3>Subject options management:</h3>
-		
+		<h5>Option: pages to cut</h5>
+
 	</section>
 
 	<section>

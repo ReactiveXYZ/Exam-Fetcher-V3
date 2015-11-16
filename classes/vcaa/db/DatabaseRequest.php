@@ -175,49 +175,33 @@ class DatabaseRequest
 
     }
 
-    /**
-     * retrieve pages to cut
-     * 
-     * @param String $name [name of subject]
-     * 
-     * @return numbers of page to cut
-     * 
-     **/
-
-	public function retrieve_pages_to_cut($name)
-	{
-
-	    return get_page_numbers_to_cut($name);   	
-	
-	}
 
     /**
-     * Get number of pages to cut from the database
+     * Get the processed download link
      *
      * @param String $row_name [row name referring to the subject]
      * 
-     * @return numbers of page to cut
+     * @return URL for the document downloaded
      * 
      **/
-	private function get_page_numbers_to_cut($row_name)
-	{
-		$query = "SELECT * FROM $table_name WHERE 'subject_name' = $row_name";
+	public function get_processed_document($subject_name)
+	{  
 
-		$results = $this->connection->query();
+        $tbname = $this->table_name;
 
-		if ($results->num_of_rows > 0) {
-			
-			while ($row = $result->fetch_assoc()){
-                
-                return $row['page_number_to_cut']; 
+		$sql = "SELECT filename FROM $tbname WHERE subject_name = $subject_name LIMIT 1";
 
-			}
+        $result = $this->connection->query($sql)->fetch_assoc()['filename'];
 
-		}
-		return 0;
+        if ($result) {
+            
+            return $result;
+
+        }
+
+        return 0;
 	}
     
-
 
     /**
      * Gets the value of connection.
