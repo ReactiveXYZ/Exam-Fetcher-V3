@@ -70,7 +70,7 @@ $('#enter-maintanence').click(function(e){
 
 		data: {
 
-			"action" : "maintanence"
+			"action" : "enter-mm"
 
 		},
 
@@ -85,6 +85,37 @@ $('#enter-maintanence').click(function(e){
 			alert('Error: ' + response);
 
 		}
+
+	});
+
+});
+
+$('#exit-maintanence').click(function(e){
+
+	e.preventDefault();
+
+	$.ajax({
+
+		type:"post",
+
+		url:"classes/action.php",
+
+		data: {
+			"action":"exit-mm"
+		},
+
+		success: function(response){
+
+			alert('Success: ' + response);
+
+		},
+
+		error: function(response){
+
+			alert('Error: ' + response);
+
+		}
+
 
 	});
 

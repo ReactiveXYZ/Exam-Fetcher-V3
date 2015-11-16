@@ -45,7 +45,7 @@ switch ($action) {
 	}
 		break;
 
-	case 'enter-maintanence':{
+	case 'enter-mm':{
 
 		$site_option_conn = new DatabaseRequest('site_options');
 
@@ -65,6 +65,27 @@ switch ($action) {
 
 	}
 	
+		break;
+
+	case 'exit-mm':{
+
+		$site_option_conn = new DatabaseRequest('site_options');
+
+		if (ExamFetcherSettings::exit_maintenance_mode($site_option_conn)) {
+			
+			echo "Success";
+
+		}else{
+
+			echo "Failure";
+
+		}
+
+	    $site_option_conn->getConnection()->close();
+
+	    exit();
+
+	}
 		break;
 
 	default:

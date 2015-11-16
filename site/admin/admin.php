@@ -54,9 +54,11 @@
 
 		<h3>Some extra options:</h3>
 
-		<button id="refresh-cache">Refresh cache</button>
+		<button id="refresh-cache">Refresh cache</button> <br/>
 
 		<button id="enter-maintanence">Enter maintanence</button>
+
+		<button id="exit-maintanence">Exit mantanence</button>
 
 	</section>
 		

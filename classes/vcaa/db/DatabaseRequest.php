@@ -48,7 +48,7 @@ class DatabaseRequest
         
         $tbname = $this->table_name;
 
-        $sql = "UPDATE $tbname SET value = '1' WHERE option = 'maintanence' ";
+        $sql = "UPDATE $tbname SET value = '1' WHERE options = 'maintanence' ";
 
         if ($this->connection->query($sql) === true) {
             
@@ -58,7 +58,24 @@ class DatabaseRequest
 
         return false;
         
+    }
 
+    /**
+     * Exit maintanence mode
+     * */
+    public function exit_maintanence()
+    {
+        $tbname = $this->table_name;
+
+        $sql = "UPDATE $tbname SET value = '0' WHERE options = 'maintanence' ";
+
+        if ($this->connection->query($sql) === true) {
+            
+            return true;
+
+        }
+
+        return false;
     }
 
     /**
@@ -72,7 +89,7 @@ class DatabaseRequest
 
         $tbname = $this->table_name;
 
-        $sql = "SELECT value FROM $tbname WHERE name = 'maintanence'";
+        $sql = "SELECT value FROM $tbname WHERE options = 'maintanence'";
 
         $result = $this->connection->query($sql);
 

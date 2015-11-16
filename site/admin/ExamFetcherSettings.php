@@ -1,6 +1,7 @@
 <?php 
-require_once ('../../../classes/vcaa/controllers/config.php');
-require_once ('../../../vendor/autoload.php');
+require_once('config.php');
+require (BASE_URL.'vendor/autoload.php');
+require_once (LIB_URL.'simple_html_dom.php');
 
 use VCAA\db\DatabaseRequest;
 /**
@@ -17,6 +18,7 @@ class ExamFetcherSettings
     /**
      * Trigger reloading of the home page HTML (usually once a year)
      * */
+
 	public static function refresh_home_cache()
 	{
         if (file_exists(TEMP_URL.'home.html')){
@@ -46,7 +48,7 @@ class ExamFetcherSettings
      * */
     public static function enter_maintenance_mode(DatabaseRequest $request){
 
-        if ($request->enter_maintenance_mode()) {
+        if ($request->enter_maintanence()) {
             
             return true;
 
@@ -72,6 +74,21 @@ class ExamFetcherSettings
 
         return false;
 
+    }
+
+    /**
+     * 
+     * Exit maintanence mode
+     * */
+    public static function exit_maintenance_mode(DatabaseRequest $request)
+    {
+        if ($request->exit_maintanence()) {
+            
+            return true;
+
+        }
+
+        return false;
     }
 
 }

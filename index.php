@@ -5,10 +5,12 @@
 
     require_once ('site/announcements.php');
 
+    use VCAA\db\DatabaseRequest;
+
     // Check if in maintanence
     $site_option_conn = new DatabaseRequest('site_options');
 
-    if (ExamFetcherSettings::check_maintanence($site_option_conn)) {
+    if (ExamFetcherSettings::check_if_in_maintance($site_option_conn)) {
         
         $is_maintanence = true;
 
@@ -92,15 +94,19 @@
         <div class="centered grid__col--10" id="main" style="margin-top: 5%">
             <h1 style="text-align: center">Welcome to VCAA Exam Fetcher V3 (Omega).</h1>
             <h3 style="text-align: center"><a id="advanced-settings" style="cursor: pointer;"> <i class="fa fa-cogs"></i> Settings</a></h3>
+
             <!-- Modal Announcement -->
             <div class="modal-frame" id="modal-news">
                 <div class="modal">
                     <div class="modal-inset">
                         <div class="button close-modal" id="close-news">Close</div>
-                        <div id="modal-news-body" class="modal-body">
+                        <div class="modal-body">
                             <h3>Some latest news !</h3>
                             <br/>
-                            <?php echo $data; ?>
+                            <div id="news-content">
+                                <?php echo $data; ?>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -200,11 +206,11 @@
                                         <h5>
                                             Enter your subject
                                         </h5>
-                                        <input value="SpecialistMathematics" type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required">
+                                        <input value="" type="text" placeholder="Type a few characters and select a subject" name="field_div_id_0_subject" id="field_div_id_0_subject" class="form__input ui-autocomplete-input" autocomplete="off" required="required">
                                         <h5>
                                             Enter year
                                         </h5>
-                                        <input value="2014" type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required">
+                                        <input value="" type="text" placeholder="Type a few characters and select a year" name="field_div_id_0_year" id="field_div_id_0_year" class="form__input" required="required">
                                         <br>
                                     </div>
                                 </div>
@@ -301,7 +307,7 @@
             }, 1000);
 
             //news fetching
-            var newsContent = document.getElementById('modal-news-body').innerHTML;
+            var newsContent = document.getElementById('news-content').innerHTML;
 
             if (parseInt(newsContent) != "0") {
 
