@@ -3,7 +3,7 @@ namespace VCAA\controllers;
 
 use VCAA\exam\Exam;
 use VCAA\exam\ExamFactory;
-use VCAA\db\DatabseRequest;
+//use VCAA\db\DatabaseRequest;
 
 require_once('config.php');
 
@@ -52,7 +52,7 @@ class ExamFetchController
         $this->factory = new ExamFactory();
 
         //initialize subject options
-        $this->subject_options_conn = new DatabseRequest('subject_options');
+        //$this->subject_options_conn = new DatabaseRequest('subject_options');
 
 	}
 

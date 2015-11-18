@@ -281,11 +281,11 @@
             <div id="nonsense-bulk" hidden></div>
             <iframe id="pdf-frame" style="display: none">
             </iframe>
-            <h5 style="text-align: center;"> This tool is under FISTUDIO&copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
+            <h5 style="text-align: center;"> This tool is under FISTUDIO &copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
             <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:service@fistudio.net>FISTUDIO</a> </h5>
         </div>
 
-        <script src="http://quintana.io/js/vendor/prelodr-1.0.5.min.js"></script>
+        <script type="text/javascript" src="assets/lib/prelodr-1.0.5.min.js"></script>
         <script type="text/javascript" src="assets/js/str_replace.js" ></script>
         <script type="text/javascript" src="assets/js/initializer.js"></script>
         <script type="text/javascript" src="assets/js/helper.js"></script>
@@ -345,6 +345,6 @@
 
 <?php } else { ?>
 
-    Sorry, we are currently in maintanence mode. Please come back later!
+    Sorry, we are currently in maintanence right now. Please come back later!
 
 <?php } ?>
