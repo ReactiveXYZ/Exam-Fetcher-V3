@@ -302,29 +302,44 @@ function constructTableFromData (table_name,data) {
                     
             $.each(vlu,function(index,exam){
 
+                // main configuration
                 var anchor = document.createElement('a');
 
                 anchor.innerText = exam["title"];
 
                 anchor.href = exam["url"];
 
-                anchor.className = "downloadable";
+                
 
-                anchor.target = "_blank";
+                if (exam['url'] != "not_available") {
 
-                tdEachExam.appendChild(anchor);
+                    // set hidden anchor
+                    var hiddenAnchor = document.createElement('a');
 
-                var hiddenAnchor = document.createElement('a');
+                    hiddenAnchor.href = exam["url"];
 
-                hiddenAnchor.href = exam["url"];
+                    hiddenAnchor.style.display = "none";
 
-                hiddenAnchor.style.display = "none";
+                    hiddenAnchor.className = "hidden-download";
 
-                hiddenAnchor.className = "hidden-download";
+                    hiddenAnchor.setAttribute('download', exam["url"]);
 
-                hiddenAnchor.setAttribute('download', exam["url"]);
+                    tdEachExam.appendChild(hiddenAnchor);
 
-                tdEachExam.appendChild(hiddenAnchor);
+                    // config real anchor
+                    anchor.className = "downloadable";
+
+                    anchor.target = "_blank";
+
+                    tdEachExam.appendChild(anchor);
+
+                }else{
+
+                    anchor.className = "not-downloadable";
+
+                    tdEachExam.appendChild(anchor);
+
+                }
 
                 tdEachExam.innerHTML += "<br/>";
 

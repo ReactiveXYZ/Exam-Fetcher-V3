@@ -137,22 +137,53 @@ class ExamFetchController
                         if ((string)$year_array[$j] == $year) {
 
                             // Check schema
-                            $section_to_fetch = null;
+                            $section_to_fetch = null; $exceptions = [];
 
+                            // load section to fetch 
                             if ($this->is_paper && $this->is_report) {
 
                                 $section_to_fetch = $tr;
+
+                                // check unreleased content
+                                $exam_section = $tr->find('td',1);
+
+                                $report_section = $tr->find('td',2);
+
+                                if ($this->check_has_unrelease_contents($exam_section)) {
+                                    
+                                    array_push($exceptions, "exam");
+
+                                }
+
+                                if ($this->check_has_unrelease_contents($report_section)) {
+                                    
+                                    array_push($exceptions, "report");
+
+                                }
 
                             }
                             elseif ($this->is_paper) {
 
                                 $section_to_fetch = $tr->find('td',1);
 
+                                // check unreleased content
+                                if ($this->check_has_unrelease_contents($section_to_fetch)) {
+                                    
+                                    array_push($exceptions, "exam");
+
+                                }
+
                             }
                             elseif ($this->is_report){
 
                                 $section_to_fetch = $tr->find('td',2);
 
+                                // check unreleased content
+                                if ($this->check_has_unrelease_contents($section_to_fetch)) {
+                                    
+                                    array_push($exceptions, "report");
+
+                                }
                             }
 
                             //fetch and construct
@@ -177,11 +208,29 @@ class ExamFetchController
                                     'url' => $this::$base_url.$link_url
                                 );
                                 
-
                                 //Pack exam
                                 $this->factory->package_exam_instance_with_data($options);
+                            }
+
+                            // load exceptions
+                            foreach ($exceptions as $exception) {
+
+                                $options = array(
+
+                                    'subject_name' => $subj_name,
+
+                                    'title' => $exception." not published",
+
+                                    'year' => $year_title,
+
+                                    'url' => "not_available"
+                                );
+                                
+                                //Pack exam
+                                $this->factory->package_exam_instance_with_data($options);                                
 
                             }
+
 
                         }
 
@@ -195,7 +244,27 @@ class ExamFetchController
 
     }
 
-	/**
+    /**
+     * Check if the section has unreleased contents 
+    **/ 
+    private function check_has_unrelease_contents($html)
+    {
+        
+        foreach ($html->find("text") as $text) {
+            
+            if (preg_match('/available/', $text)) {
+
+                return true;
+
+            }
+            
+        }
+
+        return false;
+
+    }
+
+	/* *
 	 * Get the page url of each subject
 	 * */
     private function find_subject_page_url($subject_name)		

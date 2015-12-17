@@ -2095,3 +2095,9 @@ section {
   }
 }
 
+.not-downloadable{
+  pointer-events: none;
+  cursor: default;
+  color:red;
+  font-weight: 100;
+}

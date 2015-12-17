@@ -345,6 +345,6 @@
 
 <?php } else { ?>
 
-    Sorry, we are currently in maintanence right now. Please come back later!
+    Sorry, we are in maintanence right now. Please come back later!
 
 <?php } ?>
