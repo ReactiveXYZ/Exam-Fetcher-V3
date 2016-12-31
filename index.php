@@ -145,17 +145,6 @@
             </div>
             <div class="modal-overlay"></div>
 
-            <!--- Floating Buttons -->
-            <div id="container-floating">
-                <div title="Unihigh Login (Comming Soon)" class="nd1 nds" id="unihigh-login">
-                    <p class="letter"><i style="margin-top: 30%" class="fa fa-sign-in"></i></p>
-                </div>
-                <div id="floating-button">
-                    <p class="plus_float">+</p>
-                    <img class="edit" src="http://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
-                </div>
-            </div>
-
             <!-- Slide Menu & Tag-Cloud -->
             <div class="slideItWrapper">
                 <a href="#modal" class="slideIt">
@@ -281,8 +270,8 @@
             <div id="nonsense-bulk" hidden></div>
             <iframe id="pdf-frame" style="display: none">
             </iframe>
-            <h5 style="text-align: center;"> This tool is under FISTUDIO &copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
-            <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:service@fistudio.net>FISTUDIO</a> </h5>
+            <h5 style="text-align: center;"> This tool is under ReactiveXYZ &copy |Easy Exam Fetching Experience From 2002 - <?php echo date("Y")-1 ?> | We use cookie to enhance your fetching experience.</h5>
+            <h5 style="text-align: center"> <a href="http://fistudio.net/?p=371" target="_blank" style="text-decoration: underline">Future Developments and change logs</a> | Report a bug to <a style="text-decoration: underline" href=mailto:support@reactive.xyz>Reactive XYZ</a> </h5>
         </div>
 
         <script type="text/javascript" src="assets/lib/prelodr-1.0.5.min.js"></script>
